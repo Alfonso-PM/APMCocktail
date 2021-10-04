@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
@@ -36,7 +37,7 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
     private lateinit var btnGrid: Button
     private lateinit var swpRefreshRow: SwipeRefreshLayout
     private lateinit var swpRefreshGrid: SwipeRefreshLayout
-    var isGrid:Boolean=true
+    var isRow:Boolean=true //COMPROBAR SI ESTA EN MODO ROW
 
     private val cocktailViewModel by viewModels<CocktailViewModel>()
 
@@ -46,7 +47,7 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
             observe(state, ::onViewStateChanged)
             failure(failure, ::handleFailure)
 
-            doGetCocktailsByName("")
+            doGetCocktailsByName("margarita")
         }
 
 
@@ -80,24 +81,29 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
     override fun setBinding(view: View) {
         binding= CocktailFragmentBinding.bind(view)
 
+        binding.svCocktail.setOnQueryTextListener(object :  SearchView.OnQueryTextListener {})
 
 
         binding.btnGrid.setOnClickListener{
-            if(isGrid){
+
+            //SI ES ROW
+            if(isRow){
+                //SE APLICAN LOS CAMBIOS AL ROW COCKTAIL
                 binding.rcCocktails.apply{
                     adapter=this@CocktailFragment.adapter
                 }
-
+                //Y SU LAYOUT MANAYER ES LINEAR
                 binding.rcCocktails.layoutManager=LinearLayoutManager(requireContext())
-                isGrid=false
+                isRow=false
             }
             else{
+                //SE APLICAN LOS CAMBIOS AL ROW COCKTAIL
                 binding.rcCocktails.apply{
                     adapter=this@CocktailFragment.adapterGrid
                 }
-
+                //Y SU LAYOUT MANAYER ES TIPO GRID
                 binding.rcCocktails.layoutManager=GridLayoutManager(requireContext(), 3)
-                isGrid=true
+                isRow=true
             }
         }
 

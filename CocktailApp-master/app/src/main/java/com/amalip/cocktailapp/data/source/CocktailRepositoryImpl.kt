@@ -12,7 +12,7 @@ import javax.inject.Inject
 class CocktailRepositoryImpl @Inject constructor(private val cocktailApi: CocktailApi, private val networkHandler: NetworkHandler): CocktailRepository, ApiRequest {
 
 
-    override fun getCocktailsByName(name: String) = makeRequest(networkHandler, cocktailApi.getCocktailsByName("margarita"), { it }, CocktailsResponse(
+    override fun getCocktailsByName(name: String) = makeRequest(networkHandler, cocktailApi.getCocktailsByName(name), { it }, CocktailsResponse(
             emptyList()))
 
 
