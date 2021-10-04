@@ -48,7 +48,7 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
 
         adapter.addData(cocktails)
 
-        binding.rcCocktails.apply{
+        binding.gdCocktails.apply{
             adapter=this@CocktailFragment.adapter
         }
     }

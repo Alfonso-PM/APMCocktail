@@ -8,6 +8,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btnGrid"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            app:cornerRadius="28dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="|||"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.950"
+            app:layout_constraintHorizontal_bias="0.900"/>
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/svCocktail"
             android:layout_width="0dp"
@@ -17,9 +31,10 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swpRefresh"
+            android:id="@+id/swpRefreshRow"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,6 +51,29 @@
 
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swpRefreshGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/svCocktail">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/gdCocktails"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                tools:itemCount="10"
+                tools:listitem="@layout/grid_cocktail"/>
+
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
