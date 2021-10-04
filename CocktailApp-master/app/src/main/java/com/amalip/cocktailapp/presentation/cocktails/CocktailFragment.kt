@@ -81,7 +81,23 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
     override fun setBinding(view: View) {
         binding= CocktailFragmentBinding.bind(view)
 
-        binding.svCocktail.setOnQueryTextListener(object :  SearchView.OnQueryTextListener {})
+
+
+        binding.svCocktail.setOnQueryTextListener(object :  SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(sv: String): Boolean{
+                cocktailViewModel.apply {
+                    doGetCocktailsByName(sv)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(sv: String): Boolean{
+                cocktailViewModel.apply {
+                    doGetCocktailsByName(sv)
+                }
+                return true
+            }
+        })
 
 
         binding.btnGrid.setOnClickListener{
